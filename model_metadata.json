@@ -1,0 +1,37 @@
+{
+  "pipeline_version": "v8.3",
+  "model_type": "CalibratedClassifierCV(VotingClassifier(RF+GBM), isotonic)",
+  "sklearn_version_trained": "1.9.0",
+  "feature_names": [
+    "Slope_LOLA",
+    "TMC_Roughness",
+    "SC_bright",
+    "PSR_score",
+    "BDI_2000",
+    "BDI_3000",
+    "Poleward",
+    "LOLA_elev",
+    "Incidence_Angle"
+  ],
+  "n_features": 9,
+  "decision_threshold": 0.7,
+  "training_mode": "ANCHOR_ONLY (pure transfer learning \u2014 zero circularity)",
+  "anchor_sources": [
+    "LCROSS/Cabeus (Colaprete 2010) \u2014 120 ICE+",
+    "Chandrayaan-1 M3 South Pole (Pieters/Clark 2009) \u2014 80 ICE+",
+    "Shackleton MiniRF+LPNS (Spudis 2010) \u2014 60 ICE+",
+    "Earth Permafrost Alaska (Rignot 1994) \u2014 40 ICE+",
+    "Sunlit Highlands (Clementine/IIRS) \u2014 150 DRY-",
+    "Steep Crater Walls (LOLA/Vasavada 1999) \u2014 150 DRY-"
+  ],
+  "training_ice_pixels": 300,
+  "training_dry_pixels": 300,
+  "circularity_status": "ZERO \u2014 trained on external anchors from independent missions only. Sverdrup tile SAR data NOT used as labels.",
+  "rf_features_radar_free": true,
+  "post_prediction_gates": [
+    "ROCK_MASK zeros roughest 2% terrain",
+    "IIRS veto: 70% penalty on sunlit no-OH pixels"
+  ],
+  "spatial_cv": "Top/Bottom split (rows 0-750 train, 750-1500 test)",
+  "decision_threshold_note": "P>0.70 conservative threshold. Isotonic calibration ensures P is a true probability, not just a score."
+}

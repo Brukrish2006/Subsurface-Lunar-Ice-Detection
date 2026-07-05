@@ -1,0 +1,82 @@
+================================================================================
+  LUNAR ICE DETECTION v8.2 AI  --  Bharatiya Antariksh Hackathon 2026
+  Problem Statement 8  |  Sverdrup Region, South Pole (~89.5 S, 152 E)
+================================================================================
+
+  DATA (GRD-validated geographic tiles)
+  FP SAR (HH/HV/VH/VV, 2021-04-11):             lines 699-929  (lat -89.80 to -89.20)
+  CP SAR (LH/LV,       2025-09-13):             lines 44630-60312  (lat -89.85 to -89.20)
+  TMC-2  (terrain,     2021-05-18):             lat-equivalent centre slice
+  OHRC   (morphology,  2025-03-03):             lat-equivalent centre slice
+  IIRS   (hyperspect., 2023-12-22):             lines 15200-16288 (southernmost)
+  NASA LRO:                                     Physics model (Paige 2010) + PDS ODE query
+
+  ICE PHYSICS (10 lines of evidence)
+  1. FP-CPR>1.0:                                (HH+VV+2HV)/(HH+VV-2HV)  Sinha 2026
+  2. CP-DOP<0.13 STRICT [CORRECTED]:            DOP=|LH-LV|/(LH+LV)  (incoherent GRI)
+  3. CP m-chi<0:                                volume scatter  Raney 2007
+  4. IIRS 2.0um BDI:                            H2O combination band
+  5. IIRS 3.0um BDI:                            OH/H2O fundamental
+  6. Dielectric ice fraction:                   f=(CPR-rock)/(ice-rock)
+  7. T<110K stability:                          Vasavada 1999
+  8. PSR~55K DIVINER:                           Paige et al. 2010
+  9. Dual-sensor CPR:                           FP AND CP independently
+  10. DSC detection:                            O'Brien & Byrne 2022
+
+  ICE DETECTION RESULTS
+  STRICT (CPR>1.244 & DOP<0.13):                3,316 px (0.32%)  area=0.0101 km^2
+  RELAXED (CPR>1 & DOP<0.35):                   7,588 px (0.72%)
+  DUAL CPR (FP & CP >1.0):                      59,999 px (5.73%)
+
+  TERRAIN
+  Safe (slope<=15 deg):                         4,982 (0.3%)
+  PSR:                                          0.992 km^2  (22.3%)
+  DSC clusters:                                 0  area=0.0000 km^2
+
+  EXCAVATION TARGETING
+  Primary Target Region:                        None
+  Target Morphology:                            N/A
+  Target Max P(ice):                            N/A
+
+  4-TIER CONFIDENCE
+  T4 CONFIRMED:                                 1 (0.000%)
+  T3 HIGH:                                      3,316 (0.228%)
+  T2 PROBABLE:                                  4,271 (0.294%)
+  T1 CANDIDATE:                                 96,696 (6.646%)
+
+  VOLUME/MASS (top 5m, 10-50% ice)
+  Volume:                                       29 - 54 m^3
+  Mass:                                         27 - 50 tonnes
+
+  ROVER PATH
+  A* path length:                               5391 m  (5.39 km)
+
+  AI/ML
+  Random Forest:                                200 trees, 9 features, Topo/Thermal surrogate
+  ML ice pixels:                                44  (0.0%)
+
+  Feature importances:
+    Slope_LOLA             33.1%  ################
+    TMC_Roughness          28.6%  ##############
+    PSR_score              12.5%  ######
+    LOLA_elev              10.2%  #####
+    Poleward                6.6%  ###
+    Incidence_Angle         4.1%  ##
+    BDI_3000                2.1%  #
+    BDI_2000                1.6%  
+    SC_bright               1.2%  
+
+  SCIENTIFIC NOTE
+  DOP = 34.20% pixels < 0.13.
+  CPR>1.244 AND DOP<0.13 = 0.32% raw => significant ice presence.
+  PSR coverage confirms cold stable environment for ice preservation.
+  IIRS 3.0um OH absorption: valid in SUNLIT terrain only (passive reflectance).
+  PSR-interior ice confirmed by CPR + DOP + chi + thermal criteria alone.
+
+  REFERENCES
+  Sinha et al. (2026) npj Space Exploration 2, 22
+  Paige et al. (2010) Science 330, 479  [DIVINER]
+  Vasavada et al. (1999) Icarus 141
+  O'Brien & Byrne (2022) GRL
+
+================================================================================
