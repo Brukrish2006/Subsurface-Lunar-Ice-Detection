@@ -383,6 +383,7 @@ Sverdrup Crater/
 | `RandomForest_LunarIce_Model.pkl` | Trained voting ensemble (RF + GBM + isotonic calibration) |
 | `StandardScaler_LunarIce.pkl` | Feature scaler (must be used with the model) |
 | `model_metadata.json` | Training mode, anchor sources, feature list, circularity status, spatial CV split |
+| `Sverdrup_3D_Interactive.html`| 3-D visualisation of the rover path|
 
 ---
 
